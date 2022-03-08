@@ -1,0 +1,284 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}}
+{\*\generator Riched20 10.0.19041}\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 package Practiseproject;\par
+\par
+\par
+import java.io.BufferedReader;\par
+import java.io.BufferedWriter;\par
+import java.io.File;\par
+import java.io.FileReader;\par
+import java.io.FileWriter;\par
+import java.io.IOException;\par
+import java.util.Scanner;\par
+import java.util.StringTokenizer;\par
+\par
+public class FileHandling \{\par
+\tab public static void main(String[] args) \{\par
+\tab\tab Scanner sc = new Scanner(System.in);\par
+\tab\tab  String choice, cont = "s"; \par
+\tab\tab  \par
+\tab\tab  while( cont.equalsIgnoreCase("s") ) \{ \par
+\tab\tab  System.out.println("\\t ***********Employee Information System***********\\n\\n");\par
+\tab\tab  \par
+\tab\tab  System.out.println("1) Add New Employee Record ");\par
+\tab\tab  System.out.println("2) View All Employee Record ");\par
+\tab\tab  System.out.println("3) Delete Employee Record ");\par
+\tab\tab  System.out.println("4) Search Record ");\par
+\tab\tab  System.out.println("5) Update Record "); \par
+\tab\tab  System.out.println("6) Exit  "); \par
+\tab\tab  \par
+\tab\tab  System.out.print("\\n\\n");\par
+\tab\tab  \par
+\tab\tab  while(true) \{\par
+\tab\tab  System.out.println("Enter your choice: ");\par
+\tab\tab  choice = sc.nextLine();\par
+\tab\tab  \par
+\tab\tab  if( choice.equals("1") ) \{\par
+\tab\tab  try \{\par
+\tab\tab AddRecord();\par
+\tab\tab\} catch (IOException e) \{\par
+\tab\tab e.printStackTrace();\par
+\tab\tab\}\par
+\tab\tab  \} else if( choice.equals("2") ) \{\par
+\tab\tab  try \{\par
+\tab\tab ViewAllRecord();\par
+\tab\tab\} catch (IOException e) \{\par
+\tab\tab e.printStackTrace();\par
+\tab\tab\}\par
+\tab\tab  \} else if( choice.equals("3") ) \{\par
+\tab\tab  \par
+\tab\tab  try \{\par
+\tab\tab DeleteRecordByID();\par
+\tab\tab\} catch (IOException e) \{\par
+\tab\tab e.printStackTrace();\par
+\tab\tab\}\par
+\tab\tab  \} else if( choice.equals("4") ) \{\par
+\tab\tab  try \{\par
+\tab\tab SearchRecordbyID();\par
+\tab\tab\} catch (IOException e) \{\par
+\tab\tab e.printStackTrace();\par
+\tab\tab\}\par
+\tab\tab  \} else if( choice.equals("5") ) \{\par
+\tab\tab  try \{\par
+\tab\tab updateRecordbyID();\par
+\tab\tab\} catch (IOException e) \{ e.printStackTrace();\par
+\tab\tab\}\par
+\tab\tab  \}\par
+\tab\tab  else if (choice.equals("6")) \{\par
+\tab\tab\tab  break;\par
+\tab\tab  \}\par
+\tab  \par
+\tab\tab  \par
+\tab\tab  System.out.println("Do you want to continue? Yes/No");\par
+\tab\tab  cont = sc.nextLine();\par
+\tab\tab  if(cont.equals("No") ) \{\par
+\tab\tab\tab  break;\par
+\tab\tab  \}\par
+\tab\tab  \par
+\tab\tab  \} \}\par
+\tab\}\par
+    \tab public static void AddRecord() throws IOException \{\par
+\tab\tab BufferedWriter bw = new BufferedWriter( new\par
+\tab\tab FileWriter("records.txt",true) );\par
+\tab\tab Scanner sc = new Scanner(System.in);\par
+\tab\tab String ID, name, age, adr;\par
+\tab\tab System.out.print("Enter Employee ID: ");\par
+\tab\tab ID = sc.nextLine();\par
+\tab\tab System.out.print("Enter Employee Name: ");\par
+\tab\tab name = sc.nextLine();\par
+\tab\tab System.out.print("Enter Employee Age: ");\par
+\tab\tab age = sc.nextLine();\par
+\tab\tab System.out.print("Enter Employee Address: ");\par
+\tab\tab adr = sc.nextLine(); \par
+\tab\tab  \par
+\tab\tab bw.write(ID+","+name+","+age+","+adr);\par
+\tab\tab bw.flush();\par
+\tab\tab bw.newLine();\par
+\tab\tab bw.close();\par
+\tab\tab\}\par
+\tab\tab public static void ViewAllRecord() throws IOException \{\par
+\tab\tab  BufferedReader br = new BufferedReader(new FileReader("records.txt") );\par
+\tab\tab  \par
+\tab\tab  String record;\par
+\tab\tab  \par
+\tab\tab  System.out.println("------------ ");\par
+\tab\tab  System.out.println("| ID Name AgeAddress |");\par
+\tab\tab  System.out.println("------------ ");\par
+\tab\tab  \par
+\tab\tab  while( ( record = br.readLine() ) != null ) \{\par
+\tab\tab  \par
+\tab\tab  StringTokenizer st = new StringTokenizer(record,",");\par
+\tab\tab  System.out.println("|   "+st.nextToken()+" "+st.nextToken()+" "+st.nextToken()+"  "+st.nextToken()+"  |");\par
+\tab\tab  \}\par
+\tab\tab  System.out.println("| |");\par
+\tab\tab  System.out.println("--------------- ");\par
+\tab\tab  br.close(); \par
+\tab\tab  \par
+\tab\tab  \}\par
+\tab\tab public static void DeleteRecordByID() throws IOException \{\par
+\tab\tab  Scanner scInput = new Scanner(System.in);\par
+\tab\tab  String ID, record;\par
+\tab\tab  \par
+\tab\tab  \par
+\tab\tab  File tempDB = new File("records_temp.txt");\par
+\tab\tab  File db = new File("records.txt");\par
+\tab\tab  \par
+\tab\tab  \par
+\tab\tab  BufferedReader br = new BufferedReader( new FileReader( db ) );\par
+\tab\tab  BufferedWriter bw = new BufferedWriter( new FileWriter( tempDB ) \par
+\tab\tab );\par
+\tab\tab  \par
+\tab\tab  \par
+\tab\tab  System.out.println("\\t Delete Employee Record\\n");\par
+\tab\tab  \par
+\tab\tab  System.out.println("Enter the Employee ID: ");\par
+\tab\tab  ID = scInput.nextLine();\par
+\tab\tab  \par
+\tab\tab  \par
+\tab\tab  while( ( record = br.readLine() ) != null ) \{\par
+\tab\tab  \par
+\tab\tab  \par
+\tab\tab  if( record.contains(ID) ) \par
+\tab\tab  continue;\par
+\tab\tab  \par
+\tab\tab  bw.write(record);\par
+\tab\tab  bw.flush();\par
+\tab\tab  bw.newLine();\par
+\tab\tab  \}\par
+\tab\tab  \par
+\tab\tab  br.close();\par
+\tab\tab  bw.close();\par
+\tab\tab  \par
+\tab\tab  db.delete();\par
+\tab\tab  \par
+\tab\tab  tempDB.renameTo(db);\par
+\tab\tab  \}\par
+\tab\tab public static void SearchRecordbyID() throws IOException \{\par
+\tab\tab  String ID,record;\par
+\tab\tab  Scanner scInput = new Scanner(System.in);\par
+\tab\tab  \par
+\tab\tab  BufferedReader br = new BufferedReader( new\par
+\tab\tab FileReader("records.txt") );\par
+\tab\tab  \par
+\tab\tab  System.out.println("\\t Search Employee Record\\n");\par
+\tab\tab  \par
+\tab\tab  \par
+\tab\tab  System.out.println("Enter the Employee ID: ");\par
+\tab\tab  ID = scInput.nextLine();\par
+\tab\tab  \par
+\tab\tab  System.out.println("----------------");\par
+\tab\tab  System.out.println("| ID Name Age Address |");\par
+\tab\tab  System.out.println("-----------------");\par
+\tab\tab  \par
+\tab\tab  while( ( record = br.readLine() ) != null ) \{\par
+\tab\tab  \par
+\tab\tab  StringTokenizer st = new StringTokenizer(record,",");\par
+\tab\tab  if( record.contains(ID) ) \{\par
+\tab\tab  System.out.println("| "+st.nextToken()+" "+st.nextToken()+" "+st.nextToken()+" "+st.nextToken()+"|");\par
+\tab\tab  \}\par
+\tab\tab  \par
+\tab\tab  \par
+\tab\tab  \par
+\tab\tab  \}\par
+\tab\tab  \par
+\tab\tab  System.out.println("|-------------|");\par
+\tab\tab  System.out.println(" ------------  ");\par
+\tab\tab  \par
+\tab\tab  br.close();\par
+\tab\tab  \par
+\tab\tab  \}\par
+\tab\tab public static void updateRecordbyID() throws IOException \{\par
+\tab\tab  String newName, newAge, newAddr, record, ID,record2;\par
+\tab\tab  \par
+\tab\tab  File db = new File("records.txt");\par
+\tab\tab  File tempDB = new File("records_temp.txt");\par
+\tab\tab  \par
+\tab\tab  BufferedReader br = new BufferedReader( new FileReader(db) );\par
+\tab\tab  BufferedWriter bw = new BufferedWriter( new FileWriter(tempDB) );\par
+\tab\tab  \par
+\tab\tab  Scanner scInput = new Scanner(System.in);\par
+\tab\tab  \par
+\tab\tab  System.out.println("\\t\\t Update Employee Record\\n\\n"); \par
+\tab\tab /**/\par
+\tab\tab System.out.println("Enter the Employee ID: ");\par
+\tab\tab  ID = scInput.nextLine(); \par
+\tab\tab  System.out.println("-------------");\par
+\tab\tab  System.out.println("|ID Name Age Address |");\par
+\tab\tab  System.out.println("--------------");\par
+\tab\tab  \par
+\tab\tab  while( ( record = br.readLine() ) != null ) \{\par
+\tab\tab  \par
+\tab\tab  StringTokenizer st = new\par
+\tab\tab StringTokenizer(record,",");\par
+\tab\tab  if( record.contains(ID) ) \{\par
+\tab\tab  System.out.println("| "+st.nextToken()+" "+st.nextToken()+" "+st.nextToken()+" "+st.nextToken()+"|");\par
+\tab\tab  \}\par
+\tab\tab  \par
+\tab\tab  \} \par
+\tab\tab  System.out.println("|-------------|");\par
+\tab\tab  System.out.println("---------------");\par
+\tab\tab  \par
+\tab\tab  br.close();\par
+\tab\tab /**/ \par
+\tab\tab  System.out.println("Enter the new Name: ");\par
+\tab\tab  newName = scInput.nextLine(); \par
+\tab\tab  System.out.println("Enter the new Age: ");\par
+\tab\tab  newAge = scInput.nextLine(); \par
+\tab\tab  System.out.println("Enter the new Address: ");\par
+\tab\tab  newAddr = scInput.nextLine(); \par
+\tab\tab  \par
+\tab\tab  BufferedReader br2 = new BufferedReader( new FileReader(db) );\par
+\tab\tab  \par
+\tab\tab  while( (record2 = br2.readLine() ) != null ) \{ \par
+\tab\tab  if(record2.contains(ID)) \{\par
+\tab\tab  bw.write(ID+","+newName+","+newAge+","+newAddr);\par
+\tab\tab  \} else \{\par
+\tab\tab  \par
+\tab\tab  bw.write(record2);\par
+\tab\tab  \} \par
+\tab\tab  bw.flush();\par
+\tab\tab  bw.newLine();\par
+\tab\tab  \}\par
+\tab\tab  \par
+\tab\tab  bw.close();\par
+\tab\tab  br2.close(); \par
+\tab\tab  db.delete(); \par
+\tab\tab  boolean success = tempDB.renameTo(db); \par
+\tab\tab  System.out.println(success); \par
+\tab\tab  \par
+\tab\tab  \}\tab\par
+\}\par
+\par
+output:\par
+\par
+\par
+\tab  ***********Employee Information System***********\par
+\par
+\par
+1) Add New Employee Record \par
+2) View All Employee Record \par
+3) Delete Employee Record \par
+4) Search Record \par
+5) Update Record \par
+6) Exit  \par
+\par
+\par
+Enter your choice: \par
+1\par
+Enter Employee ID: 5\par
+Enter Employee Name: Khan\par
+Enter Employee Age: 23\par
+Enter Employee Address: hno 83\par
+Do you want to continue? Yes/No\par
+n\par
+Enter your choice: \par
+2\par
+------------ \par
+| ID Name AgeAddress |\par
+------------ \par
+|   5 Khan 23  hno 83  |\par
+| |\par
+--------------- \par
+Do you want to continue? Yes/No\par
+}
+ 

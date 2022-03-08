@@ -1,0 +1,201 @@
+{\rtf1\ansi\deff0\nouicompat{\fonttbl{\f0\fnil\fcharset0 Calibri;}{\f1\fnil Courier New;}{\f2\fnil\fcharset1 Cambria Math;}{\f3\fnil\fcharset0 Courier New;}}
+{\colortbl ;\red127\green0\blue85;\red0\green0\blue0;\red0\green0\blue192;\red42\green0\blue255;\red106\green62\blue62;\red0\green200\blue125;}
+{\*\generator Riched20 10.0.19041}{\*\mmathPr\mmathFont2\mwrapIndent1440 }\viewkind4\uc1 
+\pard\sa200\sl276\slmult1\f0\fs22\lang9 code:\par
+\par
+\cf1\b\f1\fs20 package\cf2\b0  Virtual_key_repo;\cf0\par
+\par
+\cf1\b import\cf2\b0  java.io.File;\cf0\par
+\cf2\tab\cf1\b import\cf2\b0  java.io.IOException;\cf0\par
+\cf2\tab\cf1\b import\cf2\b0  java.util.Arrays;\cf0\par
+\cf2\tab\cf1\b import\cf2\b0  java.util.Scanner;\cf0\par
+\par
+\cf2\tab\cf1\b public\cf2\b0  \cf1\b class\cf2\b0  Locked \{\cf0\par
+\cf2\tab\cf1\b static\cf2\b0  String \cf3\i DIRECTORY\cf2\i0 ;\cf0\par
+\cf2\tab     File \cf3 folder_name\cf2 ;\cf0\par
+\par
+\cf2\tab\cf1\b public\cf2\b0  Locked() \{\cf0\par
+\cf2\tab\cf3\i DIRECTORY\cf2\i0  = System.\i getProperty\i0 (\cf4 "user.dir"\cf2 );\cf0\par
+\cf2\tab\cf3 folder_name\cf2  = \cf1\b new\cf2\b0  File(\cf3\i DIRECTORY\cf2\i0 +\cf4 "/files"\cf2 );\cf0\par
+\cf2\tab\cf1\b if\cf2\b0  (!\cf3 folder_name\cf2 .exists())\cf0\par
+\cf2\tab\cf3 folder_name\cf2 .mkdirs();\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "DIRECTORY : "\cf2 + \cf3 folder_name\cf2 .getAbsolutePath());\cf0\par
+\cf2\tab     \}\cf0\par
+\par
+\cf2\tab\cf1\b private\cf2\b0  \cf1\b static\cf2\b0  \cf1\b final\cf2\b0  String \cf3\b\i WELCOME_PROMPT\cf2\b0\i0  =\cf0\par
+\cf2\tab\cf4 "\\n  JavaProject.com"\cf2 +\cf0\par
+\cf2\tab\cf4 "\\n Kamran Khan \\n"\cf2 ;\cf0\par
+\par
+\cf2\tab\cf1\b private\cf2\b0  \cf1\b static\cf2\b0  \cf1\b final\cf2\b0  String \cf3\b\i MAIN_MENU_PROMPT\cf2\b0\i0  =\cf0\par
+\cf2\tab\cf4 "\\nMAIN MENU - Select any of the following: \\n"\cf2 +\cf0\par
+\cf2\tab\cf4 "1 -> List files in directory\\n"\cf2 +\cf0\par
+\cf2\tab\cf4 "2 -> Add, Delete or Search\\n"\cf2 +\cf0\par
+\cf2\tab\cf4 "3 -> Exit Program"\cf2 ;\cf0\par
+\par
+\cf2\tab\cf1\b private\cf2\b0  \cf1\b static\cf2\b0  \cf1\b final\cf2\b0  String \cf3\b\i SECONDARY_MENU_PROMPT\cf2\b0\i0  =\cf0\par
+\cf2\tab\cf4 "   \\nSelect any of the following: \\n"\cf2 +\cf0\par
+\cf2\tab\cf4 "   a -> Add a file\\n"\cf2 +\cf0\par
+\cf2\tab\cf4 "   b -> Delete a file\\n"\cf2 +\cf0\par
+\cf2\tab\cf4 "   c -> Search a file\\n"\cf2 +\cf0\par
+\cf2\tab\cf4 "   d ->GoBack"\cf2 ;\cf0\par
+\par
+\cf2\tab\cf1\b void\cf2\b0  showPrimaryMenu() \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf3\b\i MAIN_MENU_PROMPT\cf2\b0\i0 );\cf0\par
+\cf2\tab\cf1\b try\cf2\b0\{\cf0\par
+\cf2\tab     Scanner \cf5\ul scanner\cf2\ulnone  = \cf1\b new\cf2\b0  Scanner(System.\cf3\b\i in\cf2\b0\i0 );\cf0\par
+\cf2\tab\cf1\b int\cf2\b0  \cf5 option\cf2  = \cf5 scanner\cf2 .nextInt();\cf0\par
+\cf2\tab\cf1\b switch\cf2\b0  (\cf5 option\cf2 )\{\cf0\par
+\cf2\tab\cf1\b case\cf2\b0  1 : \{\cf0\par
+\cf2\tab showFiles();\cf0\par
+\cf2\tab showPrimaryMenu();\cf0\par
+\cf2\tab                 \}\cf0\par
+\cf2\tab\cf1\b case\cf2\b0  2 : \{\cf0\par
+\cf2\tab showSecondaryMenu();\cf0\par
+\cf2\tab                 \}\cf0\par
+\cf2\tab\cf1\b case\cf2\b0  3 : \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "Thank You"\cf2 );\cf0\par
+\cf2\tab System.\i exit\i0 (0);\cf0\par
+\cf2\tab                 \}\cf0\par
+\cf2\tab\cf1\b default\cf2\b0 : showPrimaryMenu();\cf0\par
+\cf2\tab             \}\cf0\par
+\cf2\tab         \}\cf0\par
+\cf2\tab\cf1\b catch\cf2\b0  (Exception \cf5 e\cf2 )\{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "Please enter 1, 2 or 3"\cf2 );\cf0\par
+\cf2\tab showPrimaryMenu();\cf0\par
+\cf2\tab         \}\cf0\par
+\cf2\tab     \}\cf0\par
+\par
+\cf2\tab\cf1\b void\cf2\b0  showSecondaryMenu() \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf3\b\i SECONDARY_MENU_PROMPT\cf2\b0\i0 );\cf0\par
+\cf2\tab\cf1\b try\cf2\b0\{\cf0\par
+\cf2\tab      Scanner \cf5\ul scanner\cf2\ulnone  = \cf1\b new\cf2\b0  Scanner(System.\cf3\b\i in\cf2\b0\i0 );\cf0\par
+\cf2\tab\cf1\b char\cf2\b0 [] \cf5 input\cf2  = \cf5 scanner\cf2 .nextLine().toLowerCase().trim().toCharArray();\cf0\par
+\cf2\tab\cf1\b char\cf2\b0  \cf5 option\cf2  = \cf5 input\cf2 [0];\cf0\par
+\par
+\cf2\tab\cf1\b switch\cf2\b0  (\cf5 option\cf2 )\{\cf0\par
+\cf2\tab\cf1\b case\cf4\b0 'a'\cf2  : \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .print(\cf4 "\f2\u8627?\f1\lang9  Adding a file...Please Enter a File Name : "\cf2 );\cf0\par
+\cf2\tab                     String \cf5 filename\cf2  = \cf5 scanner\cf2 .next().trim().toLowerCase();\cf0\par
+\cf2\tab addFile(\cf5 filename\cf2 );\cf0\par
+\cf2\tab\cf1\b break\cf2\b0 ;\cf0\par
+\cf2\tab                 \}\cf0\par
+\cf2\tab\cf1\b case\cf4\b0 'b'\cf2  : \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .print(\cf4 "\f2\u8627?\f1\lang9  Deleting a file...Please Enter a File Name : "\cf2 );\cf0\par
+\cf2\tab                     String \cf5 filename\cf2  = \cf5 scanner\cf2 .next().trim();\cf0\par
+\cf2\tab deleteFile(\cf5 filename\cf2 );\cf0\par
+\cf2\tab\cf1\b break\cf2\b0 ;\cf0\par
+\cf2\tab                 \}\cf0\par
+\cf2\tab\cf1\b case\cf4\b0 'c'\cf2  : \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .print(\cf4 "\f2\u8627?\f1\lang9  Searching a file...Please Enter a File Name : "\cf2 );\cf0\par
+\cf2\tab                     String \cf5 filename\cf2  = \cf5 scanner\cf2 .next().trim();\cf0\par
+\cf2\tab searchFile(\cf5 filename\cf2 );\cf0\par
+\cf2\tab\cf1\b break\cf2\b0 ;\cf0\par
+\cf2\tab                 \}\cf0\par
+\cf2\tab\cf1\b case\cf4\b0 'd'\cf2  : \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "Going Back to MAIN menu"\cf2 );\cf0\par
+\cf2\tab showPrimaryMenu();\cf0\par
+\cf2\tab\cf1\b break\cf2\b0 ;\cf0\par
+\cf2\tab                 \}\cf0\par
+\cf2\tab\cf1\b default\cf2\b0  :System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "Please enter a, b, c or d"\cf2 );\cf0\par
+\cf2\tab             \}\cf0\par
+\cf2\tab showSecondaryMenu();\cf0\par
+\cf2\tab         \}\cf0\par
+\cf2\tab\cf1\b catch\cf2\b0  (Exception \cf5 e\cf2 )\{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "Please enter a, b, c or d"\cf2 );\cf0\par
+\cf2\tab showSecondaryMenu();\cf0\par
+\cf2\tab         \}\cf0\par
+\cf2\tab     \}\cf0\par
+\par
+\cf2\tab\cf1\b void\cf2\b0  showFiles() \{\cf0\par
+\cf2\tab\cf1\b if\cf2\b0  (\cf3 folder_name\cf2 .list().\cf3 length\cf2 ==0)\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "The folder is empty"\cf2 );\cf0\par
+\cf2\tab\cf1\b else\cf2\b0  \{\cf0\par
+\cf2\tab String[] \cf5 list\cf2  = \cf3 folder_name\cf2 .list();\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "The files in "\cf2 + \cf3 folder_name\cf2  +\cf4 " are :"\cf2 );\cf0\par
+\cf2\tab Arrays.\i sort\i0 (\cf5 list\cf2 );\cf0\par
+\cf2\tab\cf1\b for\cf2\b0  (String \cf5 str\cf2 :\cf5 list\cf2 ) \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf5 str\cf2 );\cf0\par
+\cf2\tab             \}\cf0\par
+\cf2\tab         \}\cf0\par
+\cf2\tab     \}\cf0\par
+\par
+\cf2\tab\cf1\b void\cf2\b0  addFile(String \cf5 filename\cf2 ) \cf1\b throws\cf2\b0  IOException \{\cf0\par
+\cf2\tab         File \cf5 filepath\cf2  = \cf1\b new\cf2\b0  File(\cf3 folder_name\cf2  +\cf4 "/"\cf2 +\cf5 filename\cf2 );\cf0\par
+\cf2\tab String[] \cf5 list\cf2  = \cf3 folder_name\cf2 .list();\cf0\par
+\cf2\tab\cf1\b for\cf2\b0  (String \cf5 file\cf2 : \cf5 list\cf2 ) \{\cf0\par
+\cf2\tab\cf1\b if\cf2\b0  (\cf5 filename\cf2 .equalsIgnoreCase(\cf5 file\cf2 )) \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "File "\cf2  + \cf5 filename\cf2  + \cf4 " already exists at "\cf2  + \cf3 folder_name\cf2 );\cf0\par
+\cf2\tab\cf1\b return\cf2\b0 ;\cf0\par
+\cf2\tab             \}\cf0\par
+\cf2\tab         \}\cf0\par
+\cf2\tab\cf5 filepath\cf2 .createNewFile();\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "File "\cf2 +\cf5 filename\cf2 +\cf4 " added to "\cf2 + \cf3 folder_name\cf2 );\cf0\par
+\cf2\tab     \}\cf0\par
+\par
+\cf2\tab\cf1\b void\cf2\b0  deleteFile(String \cf5 filename\cf2 ) \{\cf0\par
+\cf2\tab         File \cf5 filepath\cf2  = \cf1\b new\cf2\b0  File(\cf3 folder_name\cf2  +\cf4 "/"\cf2 +\cf5 filename\cf2 );\cf0\par
+\cf2\tab String[] \cf5 list\cf2  = \cf3 folder_name\cf2 .list();\cf0\par
+\cf2\tab\cf1\b for\cf2\b0  (String \cf5 file\cf2 : \cf5 list\cf2 ) \{\cf0\par
+\cf2\tab\cf1\b if\cf2\b0  (\cf5 filename\cf2 .equals(\cf5 file\cf2 ) &&\cf5 filepath\cf2 .delete()) \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "File "\cf2  + \cf5 filename\cf2  + \cf4 " deleted from "\cf2  + \cf3 folder_name\cf2 );\cf0\par
+\cf2\tab\cf1\b return\cf2\b0 ;\cf0\par
+\cf2\tab             \}\cf0\par
+\cf2\tab         \}\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "Delete Operation failed. FILE NOT FOUND"\cf2 );\cf0\par
+\cf2\tab     \}\cf0\par
+\par
+\cf2\tab\cf1\b void\cf2\b0  searchFile(String \cf5 filename\cf2 ) \{\cf0\par
+\cf2\tab String[] \cf5 list\cf2  = \cf3 folder_name\cf2 .list();\cf0\par
+\cf2\tab\cf1\b for\cf2\b0  (String \cf5 file\cf2 : \cf5 list\cf2 ) \{\cf0\par
+\cf2\tab\cf1\b if\cf2\b0  (\cf5 filename\cf2 .equals(\cf5 file\cf2 )) \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "FOUND : File "\cf2  + \cf5 filename\cf2  + \cf4 " exists at "\cf2  + \cf3 folder_name\cf2 );\cf0\par
+\cf2\tab\cf1\b return\cf2\b0 ;\cf0\par
+\cf2\tab             \}\cf0\par
+\cf2\tab         \}\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf4 "File NOT found (FNF)"\cf2 );\cf0\par
+\cf2\tab     \}\cf0\par
+\par
+\cf2\tab\cf1\b public\cf2\b0  \cf1\b static\cf2\b0  \cf1\b void\cf2\b0  main(String[] \cf5 args\cf2 ) \{\cf0\par
+\cf2\tab System.\cf3\b\i out\cf2\b0\i0 .println(\cf3\b\i WELCOME_PROMPT\cf2\b0\i0 );\cf0\par
+\cf2\tab Locked \cf5 menu\cf2  = \cf1\b new\cf2\b0  Locked();\cf0\par
+\cf2\tab\cf5 menu\cf2 .showPrimaryMenu();\cf0\par
+\cf2\tab     \}\cf0\par
+\cf2\tab\}\par
+\par
+\f3\lang16393 output:\par
+\par
+\cf0\f1\par
+\cf2   JavaProject.com\cf0\par
+\cf2  Kamran Khan \cf0\par
+\par
+\cf2 DIRECTORY : D:\\Javasimplilearn\\Phase1\\files\cf0\par
+\par
+\cf2 MAIN MENU - Select any of the following: \cf0\par
+\cf2 1 -> List files in directory\cf0\par
+\cf2 2 -> Add, Delete or Search\cf0\par
+\cf2 3 -> Exit Program\cf0\par
+\cf6 1\cf0\par
+\cf2 The folder is empty\cf0\par
+\par
+\cf2 MAIN MENU - Select any of the following: \cf0\par
+\cf2 1 -> List files in directory\cf0\par
+\cf2 2 -> Add, Delete or Search\cf0\par
+\cf2 3 -> Exit Program\cf0\par
+\cf6 2\cf0\par
+\cf2    \cf0\par
+\cf2 Select any of the following: \cf0\par
+\cf2    a -> Add a file\cf0\par
+\cf2    b -> Delete a file\cf0\par
+\cf2    c -> Search a file\cf0\par
+\cf2    d ->GoBack\cf0\par
+\cf6 a\cf0\par
+\cf2\f2\u8627?\f1\lang16393  Adding a file...Please Enter a File Name : \cf6 khan\cf0\par
+\cf2 File khan added to D:\\Javasimplilearn\\Phase1\\files\cf0\par
+\cf2    \cf0\par
+\cf2 Select any of the following: \cf0\par
+\cf2    a -> Add a file\cf0\par
+\cf2    b -> Delete a file\cf0\par
+\cf2    c -> Search a file\cf0\par
+\cf2    d ->GoBack\cf0\f0\fs22\lang9\par
+}
+ 
